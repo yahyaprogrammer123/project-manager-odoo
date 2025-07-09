@@ -1,0 +1,56 @@
+<odoo>
+
+        <record id="project_category" model="ir.module.category">
+            <field name="name">Project Manager</field>
+        </record>
+
+
+
+        <record id="project_manager_group" model="res.groups">
+    <field name="name">Project Manager</field>
+    <field name="category_id" ref="project_manager.project_category"/>
+   </record>
+
+    <record id="project_owner_group" model="res.groups">
+            <field name="name">Project Owner</field>
+             <field name="category_id" ref="project_manager.project_category"/>
+        </record>
+
+     <!-- Rule for Project Manager group: Can see only projects where he's the manager -->
+    <record id="project_rule_project_manager" model="ir.rule">
+        <field name="name">Project.Manager.Projects</field>
+        <field name="model_id" ref="project_manager.model_project"/>
+        <field name="domain_force">[('manager_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('project_manager.project_manager_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Rule for Project Owner group: Can see only projects where he's the owner -->
+    <record id="project_rule_project_owner" model="ir.rule">
+        <field name="name">Project.Owner.Own.Projects</field>
+        <field name="model_id" ref="model_project"/>
+        <field name="domain_force">[('owner_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('project_manager.project_owner_group'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
+<!--<odoo>-->
+<!--    <record id="property_category" model="ir.module.category">-->
+<!--        <field name="name">Real State</field>-->
+<!--    </record>-->
+<!--    <record id="property_manager_group" model="res.groups">-->
+<!--        <field name="name">Property Manager</field>-->
+<!--        <field name="category_id" ref="app_one.property_category"/>-->
+<!--    </record>-->
+<!--    <record id="property_user_group" model="res.groups">-->
+<!--        <field name="name">Property User</field>-->
+<!--        <field name="category_id" ref="app_one.property_category"/>-->
+<!--    </record>-->
+<!--</odoo>-->
+<!--access_project,access_project,model_project,project_manager.project_manager_group,1,1,1,1-->

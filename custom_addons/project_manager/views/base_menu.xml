@@ -1,0 +1,20 @@
+<odoo>
+    <menuitem
+        id="project_root_menu"
+        name="Project Manager"
+    />
+
+
+     <menuitem
+        id="projects_menu"
+        name="projects"
+        parent="project_root_menu"
+    />
+    <menuitem
+        id="configration_menu"
+        name="Configration"
+        parent="project_root_menu"
+
+    />
+</odoo>
+<!--        groups="project_manager.project_manager_group"-->

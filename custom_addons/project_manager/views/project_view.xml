@@ -1,0 +1,80 @@
+<odoo>
+     <record id="project_view_tree" model="ir.ui.view">
+        <field name="name">project tree</field>
+         <field name="type">tree</field>
+        <field name="model">project</field>
+
+         <field name="arch" type="xml">
+            <tree>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="description"/>
+                        <field name="manager_id"/>
+                        <field name="owner_id"/>
+
+            </tree>
+         </field>
+    </record>
+
+
+
+     <record id="project_view_form" model="ir.ui.view">
+        <field name="name">project form</field>
+        <field name="model">project</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="description"/>
+                        <field name="manager_id"/>
+                        <field name="owner_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!--    <record id="project_view_form" model="ir.ui.view">-->
+<!--        <field name="name">project form</field>-->
+<!--        <field name="model">project</field>-->
+<!--         <field name="arch" type="xml">-->
+<!--              <form string="Project">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="start_date"/>-->
+<!--                        <field name="end_date"/>-->
+<!--                        <field name="manager_id"/>-->
+<!--                        <field name="owner_id"/>-->
+
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+
+
+<!--         </field>-->
+<!--    </record>-->
+
+    <record id="project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">project</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+
+
+
+
+   <menuitem
+        id="project_menu_item"
+        name="Projects"
+        parent="projects_menu"
+        action="project_action"/>
+
+
+
+</odoo>
