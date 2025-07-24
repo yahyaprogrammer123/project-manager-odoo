@@ -17,14 +17,52 @@
          </field>
     </record>
 
-
-
      <record id="project_view_form" model="ir.ui.view">
         <field name="name">project form</field>
         <field name="model">project</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <header>
+                        <!-- زر 'Submit to Manager' -->
+                <!-- يظهر فقط عندما تكون حالة المشروع 'draft' -->
+<!--                        <field name="state" widget="statusbar"/>-->
+                <button name="action_submit_to_manager"
+                        type="object"
+                        string="Submit to Manager"
+                        invisible="state != 'draft'"
+                        class="oe_highlight"
+
+                        />
+                   <!-- زر 'Approve by Manager' -->
+                <!-- يظهر فقط عندما تكون حالة المشروع 'manager_approval' -->
+
+                <button name="action_approve_by_manager"
+                        type="object"
+                        string="Approve by Manager"
+                        invisible="state != 'manager_approval'"
+                        class="oe_highlight"
+                       />
+                    <!-- زر 'Approve by Owner' -->
+                <!-- يظهر فقط عندما تكون حالة المشروع 'owner_approval' -->
+
+                <button name="action_approve_by_owner"
+                        type="object"
+                        string="Approve by Owner"
+                        invisible="state != 'owner_approval'"
+                        class="oe_highlight"
+                         groups="project_manager.project_owner_group"/>
+
+<!--                &lt;!&ndash; زر 'Close Project' &ndash;&gt;-->
+<!--                &lt;!&ndash; يظهر فقط عندما تكون حالة المشروع 'open' &ndash;&gt;-->
+
+                <button name="action_close_project"
+                        type="object"
+                        string="Close Project"
+                        invisible="state != 'open'"
+                        class="oe_highlight"
+                        groups="project_manager.project_manager_group"/>
+                    </header>
                     <group>
                         <field name="name"/>
                         <field name="start_date"/>
@@ -32,32 +70,13 @@
                         <field name="description"/>
                         <field name="manager_id"/>
                         <field name="owner_id"/>
+                        <field name="state" readonly="1"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-<!--    <record id="project_view_form" model="ir.ui.view">-->
-<!--        <field name="name">project form</field>-->
-<!--        <field name="model">project</field>-->
-<!--         <field name="arch" type="xml">-->
-<!--              <form string="Project">-->
-<!--                <sheet>-->
-<!--                    <group>-->
-<!--                        <field name="name"/>-->
-<!--                        <field name="start_date"/>-->
-<!--                        <field name="end_date"/>-->
-<!--                        <field name="manager_id"/>-->
-<!--                        <field name="owner_id"/>-->
-
-<!--                    </group>-->
-<!--                </sheet>-->
-<!--            </form>-->
-
-
-<!--         </field>-->
-<!--    </record>-->
 
     <record id="project_action" model="ir.actions.act_window">
         <field name="name">Project</field>
@@ -65,16 +84,10 @@
         <field name='view_mode'>tree,form</field>
     </record>
 
-
-
-
-
    <menuitem
         id="project_menu_item"
         name="Projects"
         parent="projects_menu"
         action="project_action"/>
-
-
 
 </odoo>

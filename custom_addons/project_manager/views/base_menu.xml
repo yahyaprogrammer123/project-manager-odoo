@@ -10,7 +10,8 @@
         name="projects"
         parent="project_root_menu"
     />
-    <menuitem
+
+     <menuitem
         id="configration_menu"
         name="Configration"
         parent="project_root_menu"
